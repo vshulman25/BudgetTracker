@@ -3,10 +3,7 @@ const FILES_TO_CACHE = [
     '/index.html',
     '/db.js',
     '/index.js',
-    'style.css',
-
-    'https://fonts.googleapis.com/css?family=Istok+Web|Montserrat:800&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
+    'style.css'
 ];
 
 const PRECACHE = 'cache-v1';
@@ -14,7 +11,7 @@ const DATA_CACHE = 'data-cache-v1';
 
 self.addEventListener("install", event => {
     event.waitUntil(caches.open(PRECACHE).then(cache => {
-        return cache.addAll(FILES_TO_CACHE)
+        return cache.addAll(FILES_TO_CACHE).then(self.skipWaiting())
     }))
 })
 
@@ -27,11 +24,7 @@ self.addEventListener("fetch", event => {
                 }).catch (err => {
                     return cache.match(err)
                 }).catch (err => console.log(err));
-
-              
-
-            });
-            
+            });  
         }))
         return;
     }
@@ -46,7 +39,5 @@ self.addEventListener("fetch", event => {
             })
         })
     )
-
-
 })
 
