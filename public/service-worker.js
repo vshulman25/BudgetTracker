@@ -11,7 +11,7 @@ const DATA_CACHE = 'data-cache-v1';
 
 self.addEventListener("install", event => {
     event.waitUntil(caches.open(PRECACHE).then(cache => {
-        return cache.addAll(FILES_TO_CACHE).then(self.skipWaiting())
+        return cache.addAll(FILES_TO_CACHE);
     }))
 })
 
